@@ -1,4 +1,4 @@
-
+using APIs.Middleware;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,7 +9,7 @@ builder.Logging.ClearProviders();
 
 // Add services
 builder.Services.AddControllers().ConfigureApiBehaviorOptions(x => { x.SuppressMapClientErrors = true; });
-//builder.Services.RegisterIoCs(builder.Configuration);
+builder.Services.RegisterIoCs(builder.Configuration);
 
 // Configure services
 builder.Services.AddSwagger();
