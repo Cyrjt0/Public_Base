@@ -1,0 +1,92 @@
+Yêu cầu :
+	+ Các bảng có khóa chính kiểu UNIQUEIDENTIFIER 
+	+ Phần quyền User theo nhóm
+	+ có 2 mode menu là vertical and horizontal 
+	+ reponsive menu 
+	+ 2 chế độ là light + darkMode
+	
++ Về phân quyền User sẽ có các mục sau 
+	+ Quyền truy cập Url trên FE
+	+ Quyền sử dụng API endpoint
+	+ Ẩn hiện button theo EndPoint BE đối với trên FE
+	+ Có sử dụng nhóm quyền để setup 1 nhóm người dùng có cùng chức năng
+	+ render menu theo BE trả về đối với từng User
+	
+- Ví dụ : 
+	+ FE bao gồm các Url như 
+		+ /Dashboard có các quyền như view 
+		+ /Store có các quyền như view , create-update-delete-import(button)
+		+ /Book có các quyền như view , create-update-delete-import(button)
+		+ /Report : có các submenu như : /Report1 , /Report2, /Report3 ( Đối với menu này chỉ có 1 nút là Export ai được phép truy cập sẽ được sử dụng chức năng đó ) 
+		
+	+ BE bao gồm các endpoint như sau
+		+ /Dashboard có các quyền như view , export
+		+ /Store có các quyền như view-create-update-delete-export-import
+		+ /Book có các quyền như view-create-update-delete-export-import
+		+ /Report với Router là [Router(Report1)], [Router(Report2)], [Router(Report3)]
+
+	+ Tạo ra các nhóm quyền ví dụ như 
+		+ Admin full quyền
+		+ Leader bao gồm 
+			+ /Dashboard được phép truy cập ( tức là view dữ liệu và GetAll trên endpoint API )
+			+ /Store có quyền view và delete ( bao gồm GetAll, delete trên API tương ứng với view và hiển thị button delete trên FE )
+			+ /Book không được phép truy cập ( không xuất hiện menu )
+			+ /Report/Report1 và /Report/Report2 ( report3 bị ẩn không xuất hiện trên menu )
+		+ StandUser
+			+ /Dashboard không được phép truy cập ( không xuất hiện menu )
+			+ /Store có các quyền như view , create-update-import, 
+				( bao gồm GetAll, create-update-import trên API tương ứng với view và hiển thị button create-update-import trên FE )
+			+ /Book có các quyền như view , create-update-import, 
+				( bao gồm GetAll, create-update-import trên API tương ứng với view và hiển thị button create-update-import trên FE )
+			+ /Report/Report3 ( các menu còn lại sẽ không xuất hiện )
+			
++ Thiết kế class theo chuẩn OOP và sử dụng những tham số gì thì chỉ thể hiện những tham số đó trên swagger
+	Ví dụ
+	public class User
+	{
+		public Guid UserId { get; set; }
+		public string UserAccount { get; set; }
+		public string UserName { get; set; }
+	}
+	
+	public class CreateUser : User
+	{
+		public CreateStudent(string userAccount, string userName)
+		{
+			UserId = new Guild;
+			UserAccount = userAccount;
+			UserName = userName;
+			Create_Time = DateTime.Now; // Thời gian tạo tự động
+			User_Create = "Current User"; // Thay thế bằng tên người dùng thực tế
+			// Nếu là tài khoản đầu tiên sẽ mặc định 00000-000000....
+		}
+	}
+	
+	public class UpdateUser : User
+	{
+		public UpdateUser(Guid userId, string userAccount, string userName)
+		{
+			UserId = userId;
+			UserAccount = userAccount;
+			UserName = userName;
+			Update_Time = DateTime.Now; // Thời gian cập nhật tự động
+			User_Update = "Current User"; // Thay thế bằng Id dùng thực tế
+		}
+	}
+	
+	public class DeleteUser
+	{
+		public Guid UserId { get; set; }
+	
+		public DeleteStudent(Guid userId)
+		{
+			UserId = userId;
+		}
+	}
+	
+	public class GetAllUser : User
+	{
+		public int PageSize {get;set;} // default = 10
+		public int PageIndex {get;set;} // defalut = 1
+	}
+
