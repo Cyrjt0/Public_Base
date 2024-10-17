@@ -1,0 +1,7 @@
+1, Lỗi khi dùng yarn 
+	+ Error : 'yarn' is not recognized as an internal or external command, operable program or batch file.
+		+ Cách fix : Mở powershell với quyền Administrator. Chạy câu lệnh sau
+			Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted
+			
+2, Lỗi F5 url khi build trên IIS 
+	+ Copy file web.config vào thư mục code trên server IIS

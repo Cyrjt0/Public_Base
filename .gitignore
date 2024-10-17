@@ -1,0 +1,58 @@
+# Thư mục build
+bin/
+obj/
+
+# Thư mục tạm thời của Visual Studio
+.vs/
+
+# Các file dự án của người dùng Visual Studio
+*.user
+*.suo
+
+# Thông tin build và gỡ lỗi
+*.csproj.user
+
+# Các file log
+*.log
+
+# Thư mục tạm thời khi dùng npm hoặc Yarn
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Các file lock
+package-lock.json
+yarn.lock
+
+# Thông tin môi trường (config bí mật)
+.env
+
+# File cấu hình tạm thời của TypeScript
+tsconfig.tsbuildinfo
+
+# Thông tin build cho React/FE
+build/
+dist/
+
+# Public tạm thời
+public/
+
+# Đối với DapperServices
+DapperServices/bin/
+DapperServices/obj/
+
+# Đối với Base_BE/APIs
+APIs/bin/
+APIs/obj/
+
+# Đối với DapperServices
+CommonServices/bin/
+CommonServices/obj/
+
+# Bỏ qua các cài đặt editor (nếu có)
+.idea/
+.vscode/
+
+# Các file hệ thống
+.DS_Store
+Thumbs.db
